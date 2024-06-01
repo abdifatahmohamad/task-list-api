@@ -28,7 +28,7 @@ public class TaskController {
         return taskService.getAllTasks();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("api/tasks/{id}")
     public String getTaskById(@PathVariable int id, HttpServletResponse response) {
         Task task = taskService.getTaskById(id);
         if (task != null) {
@@ -44,7 +44,7 @@ public class TaskController {
         return gson.toJson(taskService.addTask(newTask));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("api/tasks/{id}")
     public String updateTask(@PathVariable int id, @RequestBody Task updatedTask, HttpServletResponse response) {
         if (taskService.updateTask(id, updatedTask)) {
             return gson.toJson(updatedTask);
@@ -54,7 +54,7 @@ public class TaskController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("api/tasks/{id}")
     public String deleteTask(@PathVariable int id, HttpServletResponse response) {
         Task deletedTask = taskService.deleteTask(id);
         if (deletedTask != null) {
