@@ -19,8 +19,8 @@ import java.util.List;
 @Service
 public class TaskService {
 
-    private static final String DATA_FILE = "tasks.json";
-    private List<Task> tasks;
+    private static final String DATA_FILE = "tasks.json"; // Externalize this path if possible
+    private final List<Task> tasks;
 
     public TaskService() {
         tasks = loadTasks();
@@ -41,8 +41,7 @@ public class TaskService {
     private void saveTasks() {
         try {
             String json = new Gson().toJson(tasks);
-            Resource resource = new ClassPathResource(DATA_FILE);
-            Files.write(Paths.get(resource.getURI()), json.getBytes());
+            Files.write(Paths.get("src/main/resources/" + DATA_FILE), json.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -26,6 +26,9 @@ public class TaskController {
     @GetMapping("api/tasks")
     public List<Task> getAllTasks() {
         return taskService.getAllTasks();
+//        List<Task> tasks = taskService.getAllTasks();
+//        System.out.println("Fetched tasks: " + tasks);
+//        return tasks;
     }
 
     @GetMapping("api/tasks/{id}")
