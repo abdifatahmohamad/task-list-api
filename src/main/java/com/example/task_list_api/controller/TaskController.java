@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("api/tasks")
 public class TaskController {
 
     @Autowired
@@ -18,10 +18,10 @@ public class TaskController {
 
     private static final Gson gson = new Gson();
 
-    @GetMapping("/")
-    public String welcomeMessage() {
-        return gson.toJson("Welcome to the Task List API!");
-    }
+//    @GetMapping("/")
+//    public String welcomeMessage() {
+//        return gson.toJson("Welcome to the Task List API!");
+//    }
 
     @GetMapping("api/tasks")
     public List<Task> getAllTasks() {
