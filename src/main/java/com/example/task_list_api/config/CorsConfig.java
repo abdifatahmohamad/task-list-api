@@ -2,10 +2,10 @@ package com.example.task_list_api.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.bind.annotation.CrossOrigin;
+//import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Configuration
-@CrossOrigin
+//@CrossOrigin
 public class CorsConfig implements WebMvcConfigurer {
 
     @Override
