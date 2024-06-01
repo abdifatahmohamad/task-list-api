@@ -1,11 +1,16 @@
 package com.example.task_list_api.service;
 
+import com.example.task_list_api.model.Task;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import com.example.task_list_api.model.Task;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -14,7 +19,7 @@ import java.util.List;
 @Service
 public class TaskService {
 
-    private static final String DATA_FILE = "src/main/resources/tasks.json";
+    private static final String DATA_FILE = "tasks.json";
     private List<Task> tasks;
 
     public TaskService() {
@@ -23,8 +28,10 @@ public class TaskService {
 
     private List<Task> loadTasks() {
         try {
-            String json = new String(Files.readAllBytes(Paths.get(DATA_FILE)));
-            return new Gson().fromJson(json, new TypeToken<List<Task>>() {}.getType());
+            Resource resource = new ClassPathResource(DATA_FILE);
+            Reader reader = new InputStreamReader(resource.getInputStream());
+            Type taskListType = new TypeToken<List<Task>>() {}.getType();
+            return new Gson().fromJson(reader, taskListType);
         } catch (IOException e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -34,7 +41,8 @@ public class TaskService {
     private void saveTasks() {
         try {
             String json = new Gson().toJson(tasks);
-            Files.write(Paths.get(DATA_FILE), json.getBytes());
+            Resource resource = new ClassPathResource(DATA_FILE);
+            Files.write(Paths.get(resource.getURI()), json.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,4 +91,3 @@ public class TaskService {
         return null;
     }
 }
-
