@@ -11,8 +11,8 @@
 # Build stage
 #
 FROM maven:3.8.3-openjdk-17 AS build
-WORKDIR /task-list-api
-COPY . /task-list-api/
+WORKDIR /app
+COPY . /app/
 RUN mvn clean package
 
 #
@@ -20,6 +20,6 @@ RUN mvn clean package
 #
 FROM openjdk:17-alpine
 WORKDIR /app
-COPY --from=build /task-list-api/target/*.jar /task-list-api/task-list-api.jar
+COPY --from=build /app/target/*.jar /app/app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","task-list-api.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
