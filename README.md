@@ -1,7 +1,7 @@
 # Task List API
 
 ## Project Directory Structure
-```aidl
+```
 task-list-api/
 ├── src/
 │   ├── main/
@@ -25,7 +25,6 @@ task-list-api/
 ├── target/
 ├── pom.xml
 ├── test/
-
 ```
 
 ## About
